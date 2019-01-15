@@ -56,8 +56,14 @@ class HistoryManager:
         start = int(start - (start%period))
         end = int(end - (end%period))
         logging.info("get_global_panel start:" + str(start)+ " end:"+str(end))
+        logging.info("newstart:"+str(end - self.__volume_forward - self.__volume_average_days * DAY))
+        logging.info("newend:"+str(end-self.__volume_forward))
+        logging.info("__volume_forward:"+ str(self.__volume_forward))
+        logging.info("__volume_average_days:"+ str(self.__volume_average_days))
+        logging.info("DAY:"+str(DAY))
         coins = self.select_coins(start=end - self.__volume_forward - self.__volume_average_days * DAY,
                                   end=end-self.__volume_forward)
+
         self.__coins = coins
         for coin in coins:
             self.update_data(start, end, coin)

@@ -16,7 +16,11 @@ class NeuralNetWork:
         else:
             tf_config.gpu_options.per_process_gpu_memory_fraction = 0.2
         self.input_num = tf.placeholder(tf.int32, shape=[])
+        # feature : high low close
+        # rows : number of coins
+        # column : length?
         self.input_tensor = tf.placeholder(tf.float32, shape=[None, feature_number, rows, columns])
+        # 上次的coin权重
         self.previous_w = tf.placeholder(tf.float32, shape=[None, rows])
         self._rows = rows
         self._columns = columns
@@ -42,9 +46,13 @@ class CNN(NeuralNetWork):
 
     # grenrate the operation, the forward computaion
     def _build_network(self, layers):
+        # inputtensor : none feature rows columns
+        # after transpose none rows columns, feature
         network = tf.transpose(self.input_tensor, [0, 2, 3, 1])
+        #  none , rows , columns, features
         # [batch, assets, window, features]
-        network = network / network[:, :, -1, 0, None, None]
+        # TODO: ???
+        network = network / network[:, :, -1, 0, None, None] # TODO 
         for layer_number, layer in enumerate(layers):
             if layer["type"] == "DenseLayer":
                 network = tflearn.layers.core.fully_connected(network,

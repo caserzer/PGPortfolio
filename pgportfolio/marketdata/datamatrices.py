@@ -94,7 +94,7 @@ class DataMatrices:
         train_config = config["training"]
         start = parse_time(input_config["start_date"])
         end = parse_time(input_config["end_date"])
-        logging.info("start:"+start + " end:"+ end)
+        logging.info("start:"+str(start) + " end:"+ str(end))
         return DataMatrices(start=start,
                             end=end,
                             market=input_config["market"],

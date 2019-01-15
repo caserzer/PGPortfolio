@@ -55,6 +55,7 @@ class HistoryManager:
         """
         start = int(start - (start%period))
         end = int(end - (end%period))
+        
         coins = self.select_coins(start=end - self.__volume_forward - self.__volume_average_days * DAY,
                                   end=end-self.__volume_forward)
         self.__coins = coins

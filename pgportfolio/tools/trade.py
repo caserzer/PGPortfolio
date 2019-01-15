@@ -6,6 +6,7 @@ from pgportfolio.tools.configprocess import parse_time
 from pgportfolio.constants import *
 from pgportfolio.tools.data import get_volume_forward
 from time import time
+import logging
 
 
 def get_coin_name_list(config, online):
@@ -33,6 +34,7 @@ def get_coin_name_list(config, online):
                            volume_average_days=input_config["volume_average_days"],
                            online=online).\
         select_coins(start, end)
+    logging.info("trade start:" + str(start) + " end:" +str(end))
     return coins
 
 
